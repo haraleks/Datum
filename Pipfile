@@ -13,6 +13,8 @@ pyjwt = "*"
 djangorestframework-simplejwt = "*"
 psycopg2-binary = "*"
 requests = "*"
+djangorestframework-gis = "*"
+geopy = "*"
 
 [requires]
 python_version = "3.8"

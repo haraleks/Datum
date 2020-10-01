@@ -4,12 +4,10 @@ from datum_gis.views import (PointView, LineView, LoadData)
 
 as_view_common = {
     'get': 'list',
-    'post': 'create',
 }
 
 as_view_with_pk = {
     'get': 'retrieve',
-    'put': 'update',
     'delete': 'destroy'
 }
 

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "368b3eac846462d2624c97fd1c7e741ae5b15e93d8b4714f492140134131e894"
+            "sha256": "505df9eb040b4047e688371c93967d72403f719ffb675e5ca7393ab228122727"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -40,11 +40,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:59c8125ca873ed3bdae9c12b146fbbd6ed8d0f743e4cf5f5817af50c51f1fc2f",
-                "sha256:b5fbb818e751f660fa2d576d9f40c34a4c615c8b48dd383f5216e609f383371f"
+                "sha256:a2127ad0150ec6966655bedf15dbbff9697cc86d61653db2da1afa506c0b04cc",
+                "sha256:c93c28ccf1d094cbd00d860e83128a39e45d2c571d3b54361713aaaf9a94cac4"
             ],
             "index": "pypi",
-            "version": "==3.1.1"
+            "version": "==3.1.2"
         },
         "djangorestframework": {
             "hashes": [
@@ -53,6 +53,14 @@
             ],
             "index": "pypi",
             "version": "==3.12.1"
+        },
+        "djangorestframework-gis": {
+            "hashes": [
+                "sha256:19a873740bcdac5c963779a1755d0d4acf96c4f5b63915d452f4b866d50f77d7",
+                "sha256:1a19c9e103b3c34ed5db182cdfbc541905c5560fc4a80f86c8b976c79bdf1e6d"
+            ],
+            "index": "pypi",
+            "version": "==0.16"
         },
         "djangorestframework-jwt": {
             "hashes": [
@@ -69,6 +77,21 @@
             ],
             "index": "pypi",
             "version": "==4.4.0"
+        },
+        "geographiclib": {
+            "hashes": [
+                "sha256:12bd46ee7ec25b291ea139b17aa991e7ef373e21abd053949b75c0e9ca55c632",
+                "sha256:51cfa698e7183792bce27d8fb63ac8e83689cd8170a730bf35e1a5c5bf8849b9"
+            ],
+            "version": "==1.50"
+        },
+        "geopy": {
+            "hashes": [
+                "sha256:b88e189f0d2e0051da45b6311d5b2ced59afaf1378eb27ebb57eaf37c166a03b",
+                "sha256:fdc596bab67d9f4828f43bf9e97c4e0a1d1518b7c2357485cef0e1c3cf470220"
+            ],
+            "index": "pypi",
+            "version": "==2.0.0"
         },
         "idna": {
             "hashes": [

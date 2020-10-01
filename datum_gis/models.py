@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from geopy.distance import distance
 
 
 class Point(models.Model):
@@ -21,3 +22,7 @@ class Line(models.Model):
         null=True,
         related_name='to_point'
     )
+
+    @property
+    def distance_line(self):
+        return distance(self.from_point.geom, self.to_point.geom).km
