@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "505df9eb040b4047e688371c93967d72403f719ffb675e5ca7393ab228122727"
+            "sha256": "84584adb669d9e0106be37d04f59e3080ef7a1137bb0cd2595102f66f94774f3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,6 +38,21 @@
             ],
             "version": "==3.0.4"
         },
+        "click": {
+            "hashes": [
+                "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a",
+                "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==7.1.2"
+        },
+        "decorator": {
+            "hashes": [
+                "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760",
+                "sha256:e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"
+            ],
+            "version": "==4.4.2"
+        },
         "django": {
             "hashes": [
                 "sha256:a2127ad0150ec6966655bedf15dbbff9697cc86d61653db2da1afa506c0b04cc",
@@ -45,6 +60,14 @@
             ],
             "index": "pypi",
             "version": "==3.1.2"
+        },
+        "django-geojson-serializer": {
+            "hashes": [
+                "sha256:375c6519ef8f6cdeba616121dac1783212e8600547cb6bf1415e0779225b5fe5",
+                "sha256:3795109809776919b220b392eff29281b1b007d7e6b0421351cbe5a9b4022894"
+            ],
+            "index": "pypi",
+            "version": "==0.3"
         },
         "djangorestframework": {
             "hashes": [
@@ -77,6 +100,21 @@
             ],
             "index": "pypi",
             "version": "==4.4.0"
+        },
+        "future": {
+            "hashes": [
+                "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
+            ],
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.18.2"
+        },
+        "geocoder": {
+            "hashes": [
+                "sha256:a733e1dfbce3f4e1a526cac03aadcedb8ed1239cf55bd7f3a23c60075121a834",
+                "sha256:c9925374c961577d0aee403b09e6f8ea1971d913f011f00ca70c76beaf7a77e7"
+            ],
+            "index": "pypi",
+            "version": "==1.38.1"
         },
         "geographiclib": {
             "hashes": [
@@ -154,6 +192,13 @@
             ],
             "version": "==2020.1"
         },
+        "ratelim": {
+            "hashes": [
+                "sha256:826d32177e11f9a12831901c9fda6679fd5bbea3605910820167088f5acbb11d",
+                "sha256:e1a7dd39e6b552b7cc7f52169cd66cdb826a1a30198e355d7016012987c9ad08"
+            ],
+            "version": "==0.1.6"
+        },
         "requests": {
             "hashes": [
                 "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b",
@@ -161,6 +206,14 @@
             ],
             "index": "pypi",
             "version": "==2.24.0"
+        },
+        "six": {
+            "hashes": [
+                "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+                "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.15.0"
         },
         "sqlparse": {
             "hashes": [
@@ -177,6 +230,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.25.10"
+        },
+        "yandex-geocoder": {
+            "hashes": [
+                "sha256:7410b4cc419859c5a0f9ccae21980e37ed9cd7afe405e4a04b56013fdfb171dd",
+                "sha256:ac6c255a9977d1e88091c16fe44ed5f95c7bc587d232ca2e193221c8538ea73e"
+            ],
+            "index": "pypi",
+            "version": "==2.0.0"
         }
     },
     "develop": {}

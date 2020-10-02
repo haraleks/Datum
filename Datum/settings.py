@@ -27,7 +27,8 @@ SECRET_KEY = '_ac)7c!*2ye6v1j)y=n1%e$2i&0l+f*o!rc@@2kmpr^v_#wa)6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'rest_framework_gis',
+    'geojson_serializer',
     'datum_gis',
 
 ]

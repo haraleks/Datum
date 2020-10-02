@@ -1,6 +1,7 @@
+from geojson_serializer.serializers import geojson_serializer
 from rest_framework import serializers
-from rest_framework_gis.serializers import GeoFeatureModelSerializer, GeometrySerializerMethodField
-from django.contrib.gis.geos import Point as point
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
+
 from datum_gis.models import (Point, Line)
 
 
@@ -33,3 +34,29 @@ class LoadDataSerialaser(serializers.Serializer):
 class PointSerachSerialaizer(serializers.Serializer):
     start = serializers.IntegerField()
     end = serializers.IntegerField()
+
+
+@geojson_serializer('point')
+class PointSerialaizer(serializers.Serializer):
+    point = serializers.SerializerMethodField()
+
+    def get_point(self, obj):
+        geom = Point.objects.get(pk=obj).geom
+        return geom
+
+
+class ShowResultsDistanceSerialaizer(serializers.Serializer):
+    distance = serializers.SerializerMethodField()
+    points = PointSerialaizer(many=True)
+
+    def get_distance(self, obj):
+        return obj['distance']
+
+
+class ShowResultsScoreSerialaizer(serializers.Serializer):
+    score = serializers.SerializerMethodField()
+    points = PointSerialaizer(many=True)
+
+    def get_score(self, obj):
+        return obj['score']
+
