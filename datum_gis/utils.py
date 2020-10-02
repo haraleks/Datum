@@ -1,44 +1,95 @@
-from datum_gis.models import Point
+from datum_gis.models import Point, Line
 from collections import deque
+from django.db.models import Q as F
 
 
-def search_road(p_start, seen):
-    new_seen = []
-    next_point = []
-    new_seen.append(p_start)
-    point_start = Point.objects.get(pk=p_start)
-    for p in point_start.from_point.values():
-        if not p in seen:
-            new_seen.append(p['to_point_id'])
-            next_point.append(p['to_point_id'])
-    return new_seen, next_point
+
+def get_key(d, value):
+    for k, v in d.items():
+        if v == value:
+            return k
+
+def get_point_to(line, point_to):
+    list_p = [line.to_point.id, line.from_point.id]
+    list_p.remove(point_to)
+    line_to = list_p[0]
+    return line_to
 
 
-def count_route(point_list, p_end, seen):
-    for p in point_list:
-        route = []
-        if p['to_point_id'] == p_end:
-            route.append(p['to_point_id'])
-            return route, True
-        else:
-            point_next = Point.objects.get(pk=p['to_point_id'])
-            point_next_list = point_next.from_point.values()
-            return count_route(point_next_list, p_end, seen)
-
-#############
-start = 2
-def djekstra(start):
+def short_distance(start):
 
     Q = deque()
-    s = {}
-    s[start] = 0
+    road = {}
+    road[start] = float(0)
     Q.append(start)
     while Q:
         v = Q.pop()
-        point = Point.objects.get(pk=v)
-        for u in point.from_point.get_queryset():
+        lines = Line.objects.filter(F(from_point_id=v) | F(to_point_id=v))
+        for l in lines:
+            from_p_id = v
+            to_p_id = get_point_to(l, from_p_id)
             #если линии нет в пути словоря или сумма расстояния меньше, то обновляем очередь
-            if u.to_point.id not in s or s[v] + u.distance_line < s[u.to_point.id]:
-                s[u.to_point.id] = s[v] + u.distance_line
-                Q.append(u.to_point.id)
-    return s
+            if to_p_id not in road or road[v] + l.distance_line < road[to_p_id]:
+                road[to_p_id] = round((road[v] + l.distance_line), 2)
+                Q.append(to_p_id)
+    return road
+
+
+def short_path(start, end, road):
+    v = end
+    road_str = {k: str(v) for k, v in road.items()}
+    point_path = []
+    point_path.append(end)
+    while v is not start:
+        line = Line.objects.filter(F(from_point_id=v) | F(to_point_id=v))
+        for r in line:
+            new_distance = str(round((road[v] - r.distance_line), 2))
+            if new_distance in road_str.values():
+
+                v = get_key(road_str, new_distance)
+                point_path.append(v)
+                break
+
+    point_path.reverse()
+    print('короткий путь ', point_path)
+    print('distance ', road[end])
+    return point_path, road[end]
+
+
+def short_score(start):
+
+    Q = deque()
+    road = {}
+    road[start] = 0
+    Q.append(start)
+    while Q:
+        v = Q.pop()
+        lines = Line.objects.filter(F(from_point_id=v) | F(to_point_id=v))
+        for l in lines:
+            from_p_id = v
+            to_p_id = get_point_to(l, from_p_id)
+            #если линии нет в пути словоря или сумма расстояния меньше, то обновляем очередь
+            if to_p_id not in road or road[v] + l.score < road[to_p_id]:
+                road[to_p_id] = road[v] + l.score
+                Q.append(to_p_id)
+    return road
+
+
+def short_path_score(start, end, road):
+    v = end
+    road_str = {k: str(v) for k, v in road.items()}
+    point_path = []
+    point_path.append(end)
+    while v is not start:
+        line = Line.objects.filter(F(from_point_id=v) | F(to_point_id=v))
+        for r in line:
+            new_score = str(round((road[v] - r.score), 2))
+            if new_score in road_str.values():
+                v = get_key(road_str, new_score)
+                point_path.append(v)
+                break
+
+    point_path.reverse()
+    print('Best road ', point_path)
+    print('Min score ', road[end])
+    return point_path, road[end]

@@ -25,4 +25,8 @@ class Line(models.Model):
 
     @property
     def distance_line(self):
-        return distance(self.from_point.geom, self.to_point.geom).km
+        return round(distance(self.from_point.geom, self.to_point.geom).km, 2)
+
+    @property
+    def score(self):
+        return self.from_point.score + self.to_point.score

@@ -3,12 +3,13 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from datum_gis.models import (Point, Line)
 from datum_gis.serializers import (ViewLineSerializer, ViewPointSerializer,
-                                   LoadDataSerialaser)
+                                   LoadDataSerialaser, PointSerachSerialaizer)
 from rest_framework.decorators import api_view
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.gis.geos import Point as P
+from datum_gis.utils import (short_path, short_score, short_distance, short_path_score)
 
 
 class PointView(ModelViewSet):
@@ -47,10 +48,30 @@ class LoadData(ModelViewSet):
             l, created_l = Line.objects.get_or_create(from_point=Point.objects.get(pk=line['from_obj']),
                                                       to_point=Point.objects.get(pk=line['to_obj']))
 
-        return Response(data={'points': created_p, 'lines': created_l}, status=status.HTTP_201_CREATED)
+        return Response(data={'points': created_p, 'lines': created_l}, status=status.HTTP_200_OK)
 
 
-# class SearchMinScore(ModelViewSet):
-#
-#     def get_min(self, request):
+class MinLenght(ModelViewSet):
+    permission_classes = [permissions.AllowAny]
+    # serializer_class = MinLenghtSerialaser
 
+    def get_min_lenght(self, request, *args, **kwargs):
+        serializer = PointSerachSerialaizer(data=request.GET)
+        serializer.is_valid(raise_exception=True)
+        short_distanse_list = short_distance(serializer.data['start'])
+        path, distanse = short_path(serializer.data['start'], serializer.data['end'], short_distanse_list)
+
+        return Response(data={'path': path, 'distanse': distanse}, status=status.HTTP_200_OK)
+
+
+class MinScore(ModelViewSet):
+    permission_classes = [permissions.AllowAny]
+    # serializer_class = MinLenghtSerialaser
+
+    def get_min_score(self, request, *args, **kwargs):
+        serializer = PointSerachSerialaizer(data=request.GET)
+        serializer.is_valid(raise_exception=True)
+        short_distanse_list = short_score(serializer.data['start'])
+        path, distanse = short_path_score(serializer.data['start'], serializer.data['end'], short_distanse_list)
+
+        return Response(data={'path': path, 'distanse': distanse}, status=status.HTTP_200_OK)

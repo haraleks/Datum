@@ -28,3 +28,8 @@ class ViewLineSerializer(serializers.Serializer):
 class LoadDataSerialaser(serializers.Serializer):
     points = ViewPointSerializer(many=True)
     lines = ViewLineSerializer(many=True)
+
+
+class PointSerachSerialaizer(serializers.Serializer):
+    start = serializers.IntegerField()
+    end = serializers.IntegerField()
